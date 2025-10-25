@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState, useMemo } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { CssBaseline, Box, useMediaQuery } from '@mui/material';
 import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
 import { ThemeProvider, useThemeContext } from './context/ThemeContext';
@@ -15,6 +15,7 @@ import CalendarView from './pages/CalendarView';
 import Profile from './pages/Profile';
 import BottomNav from './components/common/BottomNav';
 import Sidebar from './components/Sidebar';
+
 
 // Theme configuration
 const getDesignTokens = (mode) => ({
@@ -60,6 +61,7 @@ function App() {
   );
 }
 
+
 function AppContent({ isMobile, mobileOpen, setMobileOpen }) {
   const { mode } = useThemeContext();
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
@@ -69,33 +71,37 @@ function AppContent({ isMobile, mobileOpen, setMobileOpen }) {
       <CssBaseline />
       <Router>
         <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-          {!isMobile && <Sidebar />}
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: { xs: 2, sm: 3 },
-              width: { sm: `calc(100% - 240px)` },
-              marginLeft: { sm: '240px' },
-              pb: 8,
-            }}
-          >
+          {/* Sidebar always shows */}
+          <Sidebar 
+            isMobile={isMobile} 
+            mobileOpen={mobileOpen} 
+            onClose={() => setMobileOpen(false)} 
+            mode={mode} 
+          />
+          <Box component="main" sx={{ 
+            flexGrow: 1, 
+            p: 3, 
+            pb: 8,
+            width: { xs: '100%', sm: 'auto' },
+            marginLeft: { sm: '240px' }
+          }}>
             <Routes>
+              {/* All routes are now accessible without authentication */}
               <Route path="/" element={<Dashboard />} />
               <Route path="/habits" element={<HabitsPage />} />
               <Route path="/meditation" element={<MeditationTracker />} />
               <Route path="/calendar" element={<CalendarView />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<Dashboard />} />
+              
+              {/* Redirect to dashboard for any other routes */}
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </Box>
-          {isMobile && <BottomNav />}
+          <BottomNav />
         </Box>
       </Router>
       <ToastContainer 
         position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
         newestOnTop
         closeOnClick
         rtl={false}
