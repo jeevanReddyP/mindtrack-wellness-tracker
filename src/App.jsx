@@ -13,6 +13,9 @@ import HabitsPage from './pages/HabitsPage';
 import MeditationTracker from './pages/MeditationTracker';
 import CalendarView from './pages/CalendarView';
 import Profile from './pages/Profile';
+import WaterTracker from './pages/WaterTracker';
+import ExerciseTracker from './pages/ExerciseTracker';
+import JournalTracker from './pages/JournalTracker';
 import BottomNav from './components/common/BottomNav';
 import Sidebar from './components/Sidebar';
 
@@ -92,6 +95,9 @@ function AppContent({ isMobile, mobileOpen, setMobileOpen }) {
               <Route path="/meditation" element={<MeditationTracker />} />
               <Route path="/calendar" element={<CalendarView />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/water" element={<WaterTracker />} />
+              <Route path="/exercise" element={<ExerciseTracker />} />
+              <Route path="/journal" element={<JournalTracker />} />
               
               {/* Redirect to dashboard for any other routes */}
               <Route path="*" element={<Navigate to="/" />} />

@@ -29,6 +29,9 @@ import {
   DirectionsRun as CardioIcon,
   SelfImprovement as YogaIcon,
   Timer as TimerIcon,
+  FitnessCenter as FitnessCenterIcon,
+  PlayArrow as PlayArrowIcon,
+  Pause as PauseIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
   CheckCircle as CheckCircleIcon,
@@ -41,7 +44,7 @@ import { format, subDays, isToday, isYesterday } from 'date-fns';
 
 const exerciseTypes = [
   { id: 'strength', name: 'Strength Training', icon: <FitnessIcon />, color: 'primary' },
-  { id: 'cardio', name: 'Cardio', icon: <DirectionsRunIcon />, color: 'secondary' },
+  { id: 'cardio', name: 'Cardio', icon: <CardioIcon />, color: 'secondary' },
   { id: 'yoga', name: 'Yoga', icon: <YogaIcon />, color: 'success' },
   { id: 'hiit', name: 'HIIT', icon: <TimerOutlinedIcon />, color: 'warning' },
   { id: 'other', name: 'Other', icon: <FitnessCenterIcon />, color: 'info' },
